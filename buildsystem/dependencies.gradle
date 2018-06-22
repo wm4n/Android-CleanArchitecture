@@ -17,7 +17,11 @@ ext {
   //Libraries
   daggerVersion = '2.16'
   butterKnifeVersion = '8.8.1'
-  recyclerViewVersion = '27.1.1'
+  // Google latest library version can be found here
+  // https://developer.android.com/topic/libraries/support-library/packages
+  recyclerViewVersion = '27.1.1' // Google v7 recyclerview library
+  fragmentVersion = '27.1.1' // Google v4 fragment library
+  supportDesign = '27.1.1' // Google Design Support Library
   rxJavaVersion = '2.1.14'
   rxAndroidVersion = '2.0.2'
   javaxAnnotationVersion = '1.0'
