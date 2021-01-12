@@ -16,7 +16,6 @@ ext {
 
   //Libraries
   daggerVersion = '2.16'
-  butterKnifeVersion = '8.8.1'
   // Google latest library version can be found here
   // https://developer.android.com/topic/libraries/support-library/packages
   recyclerViewVersion = '27.1.1' // Google v7 recyclerview library
@@ -46,9 +45,7 @@ ext {
   presentationDependencies = [
       daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
       dagger:             "com.google.dagger:dagger:${daggerVersion}",
-      butterKnife:        "com.jakewharton:butterknife:${butterKnifeVersion}",
-      butterKnifeCompiler:"com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
-      recyclerView:       "com.android.support:recyclerview-v7:${recyclerViewVersion}",
+      recyclerView: 'androidx.recyclerview:recyclerview:1.0.0',
       rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
       rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
       javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
@@ -59,7 +56,7 @@ ext {
       mockito:            "org.mockito:mockito-core:${mockitoVersion}",
       dexmaker:           "com.google.dexmaker:dexmaker:${dexmakerVersion}",
       dexmakerMockito:    "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
-      espresso:           "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+      espresso: 'androidx.test.espresso:espresso-core:3.1.0',
       testingSupportLib:  "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
   ]
 
@@ -85,7 +82,7 @@ ext {
       rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
       javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
       javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
-      androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}"
+      androidAnnotations: 'androidx.annotation:annotation:1.0.0'
   ]
 
   dataTestDependencies = [

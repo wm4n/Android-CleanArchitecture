@@ -5,14 +5,11 @@
 package com.fernandocejas.android10.sample.presentation.view.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import com.fernandocejas.android10.sample.presentation.R;
+import com.fernandocejas.android10.sample.presentation.databinding.RowUserBinding;
 import com.fernandocejas.android10.sample.presentation.model.UserModel;
 import java.util.Collection;
 import java.util.Collections;
@@ -45,13 +42,13 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
   }
 
   @Override public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    final View view = this.layoutInflater.inflate(R.layout.row_user, parent, false);
-    return new UserViewHolder(view);
+    RowUserBinding viewBinding = RowUserBinding.inflate(layoutInflater, parent, false);
+    return new UserViewHolder(viewBinding);
   }
 
   @Override public void onBindViewHolder(UserViewHolder holder, final int position) {
     final UserModel userModel = this.usersCollection.get(position);
-    holder.textViewTitle.setText(userModel.getFullName());
+    holder.viewBinding.title.setText(userModel.getFullName());
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         if (UsersAdapter.this.onItemClickListener != null) {
@@ -82,11 +79,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
   }
 
   static class UserViewHolder extends RecyclerView.ViewHolder {
-    @BindView(R.id.title) TextView textViewTitle;
 
-    UserViewHolder(View itemView) {
-      super(itemView);
-      ButterKnife.bind(this, itemView);
+    RowUserBinding viewBinding;
+
+    UserViewHolder(RowUserBinding viewBinding) {
+      super(viewBinding.getRoot());
+      this.viewBinding = viewBinding;
     }
   }
 }

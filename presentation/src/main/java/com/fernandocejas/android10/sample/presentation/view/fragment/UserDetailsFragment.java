@@ -9,19 +9,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
-import com.fernandocejas.android10.sample.presentation.R;
+import com.fernandocejas.android10.sample.presentation.databinding.FragmentUserDetailsBinding;
 import com.fernandocejas.android10.sample.presentation.internal.di.components.UserComponent;
 import com.fernandocejas.android10.sample.presentation.model.UserModel;
 import com.fernandocejas.android10.sample.presentation.presenter.UserDetailsPresenter;
 import com.fernandocejas.android10.sample.presentation.view.UserDetailsView;
-import com.fernandocejas.android10.sample.presentation.view.component.AutoLoadImageView;
 import com.fernandocejas.arrow.checks.Preconditions;
 import javax.inject.Inject;
 
@@ -33,16 +25,7 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
 
   @Inject UserDetailsPresenter userDetailsPresenter;
 
-  @BindView(R.id.iv_cover) AutoLoadImageView iv_cover;
-  @BindView(R.id.tv_fullname) TextView tv_fullname;
-  @BindView(R.id.tv_email) TextView tv_email;
-  @BindView(R.id.tv_followers) TextView tv_followers;
-  @BindView(R.id.tv_description) TextView tv_description;
-  @BindView(R.id.rl_progress) RelativeLayout rl_progress;
-  @BindView(R.id.rl_retry) RelativeLayout rl_retry;
-  @BindView(R.id.bt_retry) Button bt_retry;
-
-  private Unbinder unbinder;
+  private FragmentUserDetailsBinding mViewBinding;
 
   public static UserDetailsFragment forUser(int userId) {
     final UserDetailsFragment userDetailsFragment = new UserDetailsFragment();
@@ -63,9 +46,8 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
 
   @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    final View fragmentView = inflater.inflate(R.layout.fragment_user_details, container, false);
-    unbinder = ButterKnife.bind(this, fragmentView);
-    return fragmentView;
+    mViewBinding = FragmentUserDetailsBinding.inflate(inflater, container, false);
+    return mViewBinding.getRoot();
   }
 
   @Override public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -73,6 +55,14 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
     this.userDetailsPresenter.setView(this);
     if (savedInstanceState == null) {
       this.loadUserDetails();
+    }
+
+    if(mViewBinding != null) {
+      mViewBinding.viewRetry.rlRetry.setOnClickListener(v -> {
+        if (this.userDetailsPresenter != null) {
+          this.userDetailsPresenter.initialize(currentUserId());
+        }
+      });
     }
   }
 
@@ -88,7 +78,9 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
 
   @Override public void onDestroyView() {
     super.onDestroyView();
-    unbinder.unbind();
+    if(mViewBinding != null) {
+      mViewBinding.unbind();
+    }
   }
 
   @Override public void onDestroy() {
@@ -97,31 +89,39 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
   }
 
   @Override public void renderUser(UserModel user) {
-    if (user != null) {
-      this.iv_cover.setImageUrl(user.getCoverUrl());
-      this.tv_fullname.setText(user.getFullName());
-      this.tv_email.setText(user.getEmail());
-      this.tv_followers.setText(String.valueOf(user.getFollowers()));
-      this.tv_description.setText(user.getDescription());
+    if (user != null && mViewBinding != null) {
+      mViewBinding.viewUserDetails.ivCover.setImageUrl(user.getCoverUrl());
+      mViewBinding.viewUserDetails.tvFullname.setText(user.getFullName());
+      mViewBinding.viewUserDetails.tvEmail.setText(user.getEmail());
+      mViewBinding.viewUserDetails.tvFollowers.setText(String.valueOf(user.getFollowers()));
+      mViewBinding.viewUserDetails.tvDescription.setText(user.getDescription());
     }
   }
 
   @Override public void showLoading() {
-    this.rl_progress.setVisibility(View.VISIBLE);
+    if(mViewBinding != null) {
+      mViewBinding.viewProgress.rlProgress.setVisibility(View.VISIBLE);
+    }
     this.getActivity().setProgressBarIndeterminateVisibility(true);
   }
 
   @Override public void hideLoading() {
-    this.rl_progress.setVisibility(View.GONE);
+    if(mViewBinding != null) {
+      mViewBinding.viewProgress.rlProgress.setVisibility(View.GONE);
+    }
     this.getActivity().setProgressBarIndeterminateVisibility(false);
   }
 
   @Override public void showRetry() {
-    this.rl_retry.setVisibility(View.VISIBLE);
+    if(mViewBinding != null) {
+      mViewBinding.viewRetry.rlRetry.setVisibility(View.VISIBLE);
+    }
   }
 
   @Override public void hideRetry() {
-    this.rl_retry.setVisibility(View.GONE);
+    if(mViewBinding != null) {
+      mViewBinding.viewRetry.rlRetry.setVisibility(View.GONE);
+    }
   }
 
   @Override public void showError(String message) {
@@ -148,10 +148,5 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
     final Bundle arguments = getArguments();
     Preconditions.checkNotNull(arguments, "Fragment arguments cannot be null");
     return arguments.getInt(PARAM_USER_ID);
-  }
-
-  @OnClick(R.id.bt_retry)
-  void onButtonRetryClick() {
-    UserDetailsFragment.this.loadUserDetails();
   }
 }
