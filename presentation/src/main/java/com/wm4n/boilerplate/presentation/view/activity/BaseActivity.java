@@ -17,7 +17,7 @@ import javax.inject.Inject;
 public abstract class BaseActivity extends Activity {
 
   @Inject
-  Navigator navigator;
+  protected Navigator navigator;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

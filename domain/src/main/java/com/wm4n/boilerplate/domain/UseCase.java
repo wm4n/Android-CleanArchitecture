@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wm4n.boilerplate.domain.interactor;
+package com.wm4n.boilerplate.domain;
 
-import com.fernandocejas.arrow.checks.Preconditions;
 import com.wm4n.boilerplate.domain.executor.PostExecutionThread;
 import com.wm4n.boilerplate.domain.executor.ThreadExecutor;
-
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -35,11 +33,11 @@ import io.reactivex.schedulers.Schedulers;
  */
 public abstract class UseCase<T, Params> {
 
-  private final com.wm4n.boilerplate.domain.executor.ThreadExecutor threadExecutor;
-  private final com.wm4n.boilerplate.domain.executor.PostExecutionThread postExecutionThread;
+  private final ThreadExecutor threadExecutor;
+  private final PostExecutionThread postExecutionThread;
   private final CompositeDisposable disposables;
 
-  UseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
+  public UseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
     this.threadExecutor = threadExecutor;
     this.postExecutionThread = postExecutionThread;
     this.disposables = new CompositeDisposable();
@@ -48,7 +46,7 @@ public abstract class UseCase<T, Params> {
   /**
    * Builds an {@link Observable} which will be used when executing the current {@link UseCase}.
    */
-  abstract Observable<T> buildUseCaseObservable(Params params);
+  protected abstract Observable<T> buildUseCaseObservable(Params params);
 
   /**
    * Executes the current use case.
@@ -58,7 +56,7 @@ public abstract class UseCase<T, Params> {
    * @param params Parameters (Optional) used to build/execute this use case.
    */
   public void execute(DisposableObserver<T> observer, Params params) {
-    Preconditions.checkNotNull(observer);
+    checkNotNull(observer);
     final Observable<T> observable = this.buildUseCaseObservable(params)
         .subscribeOn(Schedulers.from(threadExecutor))
         .observeOn(postExecutionThread.getScheduler());
@@ -78,8 +76,15 @@ public abstract class UseCase<T, Params> {
    * Dispose from current {@link CompositeDisposable}.
    */
   private void addDisposable(Disposable disposable) {
-    Preconditions.checkNotNull(disposable);
-    Preconditions.checkNotNull(disposables);
+    checkNotNull(disposable);
+    checkNotNull(disposables);
     disposables.add(disposable);
+  }
+
+  public static <T> T checkNotNull(T reference) {
+    if (reference == null) {
+      throw new NullPointerException();
+    }
+    return reference;
   }
 }

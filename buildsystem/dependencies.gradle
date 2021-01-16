@@ -14,21 +14,35 @@ ext {
   androidTargetSdkVersion = 29
   androidCompileSdkVersion = 29
 
+  androidX_appCompatVersion = '1.1.0-rc01' //'1.1.0' 有 WebView 在 5.x 裝置上 crash 問題
+  androidX_recyclerViewVersion = '1.1.0'
+  androidX_constraintVersion = '1.1.3'
+  androidX_cardViewVersion = '1.0.0'
+  androidX_fragmentVersion = '1.2.4'
+  androidX_supportDesign = '1.0.0'
+  androidX_flexboxVersion = '1.1.0'
+  androidX_roomVersion = '2.2.0-alpha02'
+  androidX_lifecycleVersion = '2.2.0'
+  androidX_workManagerVersion = '2.1.0'
+
   //Libraries
   daggerVersion = '2.16'
   // Google latest library version can be found here
   // https://developer.android.com/topic/libraries/support-library/packages
-  recyclerViewVersion = '27.1.1' // Google v7 recyclerview library
-  fragmentVersion = '27.1.1' // Google v4 fragment library
-  supportDesign = '27.1.1' // Google Design Support Library e.g. TabLayout
-  rxJavaVersion = '2.1.14'
-  rxAndroidVersion = '2.0.2'
-  javaxAnnotationVersion = '1.0'
   javaxInjectVersion = '1'
   gsonVersion = '2.8.5'
   okHttpVersion = '3.10.0'
-  androidAnnotationsVersion = '27.1.1'
   arrowVersion = '1.0.0'
+
+  // Annotations
+  androidX_annotationsVersion = '1.0.0'
+  javaxAnnotationVersion = '1.0'
+  javaxInjectVersion = '1'
+
+  // Rx
+  rxBindingVersion = '3.0.0'
+  rxJavaVersion = '2.1.14'
+  rxAndroidVersion = '2.1.1'
 
   //Testing
   robolectricVersion = '3.1.1'
@@ -42,6 +56,9 @@ ext {
   //Development
   leakCanaryVersion = '1.3.1'
 
+  // Stream
+  streamVersion = '1.2.1'
+
   presentationDependencies = [
       daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
       dagger:             "com.google.dagger:dagger:${daggerVersion}",
@@ -49,7 +66,9 @@ ext {
       rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
       rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
       javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-      arrow:              "com.fernandocejas:arrow:${arrowVersion}"
+      arrow:              "com.fernandocejas:arrow:${arrowVersion}",
+      // Stream
+      javaStream          : "com.annimon:stream:${streamVersion}",
   ]
 
   presentationTestDependencies = [
@@ -82,7 +101,9 @@ ext {
       rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
       javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
       javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
-      androidAnnotations: 'androidx.annotation:annotation:1.0.0'
+      androidAnnotations: 'androidx.annotation:annotation:1.0.0',
+      // Stream
+      javaStream:         "com.annimon:stream:${streamVersion}",
   ]
 
   dataTestDependencies = [

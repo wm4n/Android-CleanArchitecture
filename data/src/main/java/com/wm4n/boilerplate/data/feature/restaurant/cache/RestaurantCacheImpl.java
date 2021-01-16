@@ -13,28 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wm4n.boilerplate.data.cache;
+package com.wm4n.boilerplate.data.feature.restaurant.cache;
 
 import android.content.Context;
+
+import com.wm4n.boilerplate.data.cache.FileManager;
 import com.wm4n.boilerplate.data.cache.serializer.Serializer;
 import com.wm4n.boilerplate.data.entity.UserEntity;
 import com.wm4n.boilerplate.data.exception.CacheNotFoundException;
+import com.wm4n.boilerplate.data.feature.restaurant.entity.RestaurantEntity;
 import com.wm4n.boilerplate.domain.executor.ThreadExecutor;
-import io.reactivex.Observable;
+
 import java.io.File;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Observable;
+
 /**
- * {@link UserCache} implementation.
+ * {@link RestaurantCache} implementation.
  */
 @Singleton
-public class UserCacheImpl implements UserCache {
+public class RestaurantCacheImpl implements RestaurantCache {
 
-  private static final String SETTINGS_FILE_NAME = "com.fernandocejas.android10.SETTINGS";
+  private static final String SETTINGS_FILE_NAME = "com.wm4n.boilerplate.data.restaurant.SETTINGS";
   private static final String SETTINGS_KEY_LAST_CACHE_UPDATE = "last_cache_update";
 
-  private static final String DEFAULT_FILE_NAME = "user_";
+  private static final String DEFAULT_FILE_NAME = "restaurant_";
   private static final long EXPIRATION_TIME = 60 * 10 * 1000;
 
   private final Context context;
@@ -44,14 +50,15 @@ public class UserCacheImpl implements UserCache {
   private final ThreadExecutor threadExecutor;
 
   /**
-   * Constructor of the class {@link UserCacheImpl}.
+   * Constructor of the class {@link RestaurantCacheImpl}.
    *
    * @param context A
    * @param serializer {@link Serializer} for object serialization.
    * @param fileManager {@link FileManager} for saving serialized objects to the file system.
    */
-  @Inject UserCacheImpl(Context context, Serializer serializer,
-      FileManager fileManager, ThreadExecutor executor) {
+  @Inject
+  RestaurantCacheImpl(Context context, Serializer serializer,
+                      FileManager fileManager, ThreadExecutor executor) {
     if (context == null || serializer == null || fileManager == null || executor == null) {
       throw new IllegalArgumentException("Invalid null parameter");
     }
@@ -62,15 +69,15 @@ public class UserCacheImpl implements UserCache {
     this.threadExecutor = executor;
   }
 
-  @Override public Observable<UserEntity> get(final int userId) {
+  @Override public Observable<RestaurantEntity> get(final String id) {
     return Observable.create(emitter -> {
-      final File userEntityFile = UserCacheImpl.this.buildFile(userId);
-      final String fileContent = UserCacheImpl.this.fileManager.readFileContent(userEntityFile);
-      final UserEntity userEntity =
-          UserCacheImpl.this.serializer.deserialize(fileContent, UserEntity.class);
+      final File entityFile = RestaurantCacheImpl.this.buildFile(id);
+      final String fileContent = RestaurantCacheImpl.this.fileManager.readFileContent(entityFile);
+      final RestaurantEntity entity =
+          RestaurantCacheImpl.this.serializer.deserialize(fileContent, RestaurantEntity.class);
 
-      if (userEntity != null) {
-        emitter.onNext(userEntity);
+      if (entity != null) {
+        emitter.onNext(entity);
         emitter.onComplete();
       } else {
         emitter.onError(new CacheNotFoundException());
@@ -78,20 +85,20 @@ public class UserCacheImpl implements UserCache {
     });
   }
 
-  @Override public void put(UserEntity userEntity) {
-    if (userEntity != null) {
-      final File userEntityFile = this.buildFile(userEntity.getUserId());
-      if (!isCached(userEntity.getUserId())) {
-        final String jsonString = this.serializer.serialize(userEntity, UserEntity.class);
-        this.executeAsynchronously(new CacheWriter(this.fileManager, userEntityFile, jsonString));
+  @Override public void put(RestaurantEntity entity) {
+    if (entity != null) {
+      final File entityFile = this.buildFile(entity.getId());
+      if (!isCached(entity.getId())) {
+        final String jsonString = this.serializer.serialize(entity, RestaurantEntity.class);
+        this.executeAsynchronously(new CacheWriter(this.fileManager, entityFile, jsonString));
         setLastCacheUpdateTimeMillis();
       }
     }
   }
 
-  @Override public boolean isCached(int userId) {
-    final File userEntityFile = this.buildFile(userId);
-    return this.fileManager.exists(userEntityFile);
+  @Override public boolean isCached(String id) {
+    final File entityFile = this.buildFile(id);
+    return this.fileManager.exists(entityFile);
   }
 
   @Override public boolean isExpired() {
@@ -114,15 +121,15 @@ public class UserCacheImpl implements UserCache {
   /**
    * Build a file, used to be inserted in the disk cache.
    *
-   * @param userId The id user to build the file.
+   * @param id The id user to build the file.
    * @return A valid file.
    */
-  private File buildFile(int userId) {
+  private File buildFile(String id) {
     final StringBuilder fileNameBuilder = new StringBuilder();
     fileNameBuilder.append(this.cacheDir.getPath());
     fileNameBuilder.append(File.separator);
     fileNameBuilder.append(DEFAULT_FILE_NAME);
-    fileNameBuilder.append(userId);
+    fileNameBuilder.append(id);
 
     return new File(fileNameBuilder.toString());
   }

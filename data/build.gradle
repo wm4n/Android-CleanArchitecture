@@ -49,6 +49,7 @@ dependencies {
   def testDependencies = rootProject.ext.dataTestDependencies
 
   implementation project(':domain')
+
   compileOnly dataDependencies.javaxAnnotation
   implementation dataDependencies.javaxInject
   implementation dataDependencies.okHttp
@@ -56,6 +57,7 @@ dependencies {
   implementation dataDependencies.rxJava
   implementation dataDependencies.rxAndroid
   implementation dataDependencies.androidAnnotations
+  implementation dataDependencies.javaStream
 
   testImplementation testDependencies.junit
   testImplementation testDependencies.assertj

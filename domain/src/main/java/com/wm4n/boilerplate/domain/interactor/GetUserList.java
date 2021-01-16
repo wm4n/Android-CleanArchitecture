@@ -15,17 +15,20 @@
  */
 package com.wm4n.boilerplate.domain.interactor;
 
-import com.wm4n.boilerplate.domain.repository.UserRepository;
-import com.wm4n.boilerplate.domain.User;
 import com.wm4n.boilerplate.domain.executor.PostExecutionThread;
 import com.wm4n.boilerplate.domain.executor.ThreadExecutor;
+import com.wm4n.boilerplate.domain.repository.UserRepository;
+import com.wm4n.boilerplate.domain.User;
+import com.wm4n.boilerplate.domain.UseCase;
 
 import io.reactivex.Observable;
+import io.reactivex.observers.DisposableObserver;
+
 import java.util.List;
 import javax.inject.Inject;
 
 /**
- * This class is an implementation of {@link com.wm4n.boilerplate.domain.interactor.UseCase} that represents a use case for
+ * This class is an implementation of {@link UseCase} that represents a use case for
  * retrieving a collection of all {@link com.wm4n.boilerplate.domain.User}.
  */
 public class GetUserList extends UseCase<List<User>, Void> {
@@ -39,7 +42,7 @@ public class GetUserList extends UseCase<List<User>, Void> {
     this.userRepository = userRepository;
   }
 
-  @Override Observable<List<User>> buildUseCaseObservable(Void unused) {
+  @Override protected Observable<List<User>> buildUseCaseObservable(Void unused) {
     return this.userRepository.users();
   }
 }

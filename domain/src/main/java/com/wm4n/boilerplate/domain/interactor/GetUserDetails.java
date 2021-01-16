@@ -15,20 +15,23 @@
  */
 package com.wm4n.boilerplate.domain.interactor;
 
+import com.wm4n.boilerplate.domain.UseCase;
+import com.wm4n.boilerplate.domain.executor.PostExecutionThread;
+import com.wm4n.boilerplate.domain.executor.ThreadExecutor;
 import com.wm4n.boilerplate.domain.repository.UserRepository;
 import com.fernandocejas.arrow.checks.Preconditions;
 import com.wm4n.boilerplate.domain.User;
-import com.wm4n.boilerplate.domain.executor.PostExecutionThread;
-import com.wm4n.boilerplate.domain.executor.ThreadExecutor;
 
 import io.reactivex.Observable;
+import io.reactivex.observers.DisposableObserver;
+
 import javax.inject.Inject;
 
 /**
  * This class is an implementation of {@link UseCase} that represents a use case for
  * retrieving data related to an specific {@link com.wm4n.boilerplate.domain.User}.
  */
-public class GetUserDetails extends UseCase<com.wm4n.boilerplate.domain.User, GetUserDetails.Params> {
+public class GetUserDetails extends UseCase<User, GetUserDetails.Params> {
 
   private final UserRepository userRepository;
 
@@ -39,8 +42,8 @@ public class GetUserDetails extends UseCase<com.wm4n.boilerplate.domain.User, Ge
     this.userRepository = userRepository;
   }
 
-  @Override Observable<User> buildUseCaseObservable(Params params) {
-    Preconditions.checkNotNull(params);
+  @Override protected Observable<User> buildUseCaseObservable(Params params) {
+    checkNotNull(params);
     return this.userRepository.user(params.userId);
   }
 

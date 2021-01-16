@@ -32,7 +32,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CloudUserDataStoreTest {
+public class CloudRestaurantDataStoreTest {
 
   private static final int FAKE_USER_ID = 765;
 

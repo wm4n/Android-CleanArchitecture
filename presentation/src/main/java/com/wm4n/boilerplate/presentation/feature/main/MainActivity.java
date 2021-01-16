@@ -1,7 +1,8 @@
-package com.wm4n.boilerplate.presentation.view.activity;
+package com.wm4n.boilerplate.presentation.feature.main;
 
 import android.os.Bundle;
 import com.wm4n.boilerplate.presentation.databinding.ActivityMainBinding;
+import com.wm4n.boilerplate.presentation.view.activity.BaseActivity;
 
 /**
  * Main application screen. This is the app entry point.

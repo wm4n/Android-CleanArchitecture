@@ -17,6 +17,7 @@ package com.wm4n.boilerplate.domain.interactor;
 
 import com.wm4n.boilerplate.domain.executor.PostExecutionThread;
 import com.wm4n.boilerplate.domain.executor.ThreadExecutor;
+import com.wm4n.boilerplate.domain.UseCase;
 
 import io.reactivex.Observable;
 import io.reactivex.observers.DisposableObserver;

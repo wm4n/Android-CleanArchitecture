@@ -17,7 +17,7 @@ package com.wm4n.boilerplate.presentation.exception;
 
 import android.content.Context;
 import com.wm4n.boilerplate.data.exception.NetworkConnectionException;
-import com.wm4n.boilerplate.data.exception.UserNotFoundException;
+import com.wm4n.boilerplate.data.exception.CacheNotFoundException;
 import com.wm4n.boilerplate.presentation.R;
 
 /**
@@ -41,7 +41,7 @@ public class ErrorMessageFactory {
 
     if (exception instanceof NetworkConnectionException) {
       message = context.getString(R.string.exception_message_no_connection);
-    } else if (exception instanceof UserNotFoundException) {
+    } else if (exception instanceof CacheNotFoundException) {
       message = context.getString(R.string.exception_message_user_not_found);
     }
 

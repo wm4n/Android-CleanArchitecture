@@ -30,7 +30,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DiskUserDataStoreTest {
+public class RandomRestaurantDataStoreTest {
 
   private static final int FAKE_USER_ID = 11;
 

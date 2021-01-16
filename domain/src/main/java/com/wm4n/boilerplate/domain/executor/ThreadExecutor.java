@@ -15,7 +15,7 @@
  */
 package com.wm4n.boilerplate.domain.executor;
 
-import com.wm4n.boilerplate.domain.interactor.UseCase;
+import com.wm4n.boilerplate.domain.UseCase;
 
 import java.util.concurrent.Executor;
 

@@ -17,7 +17,7 @@ package com.wm4n.boilerplate.test.exception;
 
 import android.test.AndroidTestCase;
 import com.wm4n.boilerplate.data.exception.NetworkConnectionException;
-import com.wm4n.boilerplate.data.exception.UserNotFoundException;
+import com.wm4n.boilerplate.data.exception.CacheNotFoundException;
 import com.wm4n.boilerplate.presentation.R;
 import com.wm4n.boilerplate.presentation.exception.ErrorMessageFactory;
 
@@ -41,7 +41,7 @@ public class ErrorMessageFactoryTest extends AndroidTestCase {
 
   public void testUserNotFoundErrorMessage() {
     String expectedMessage = getContext().getString(R.string.exception_message_user_not_found);
-    String actualMessage = ErrorMessageFactory.create(getContext(), new UserNotFoundException());
+    String actualMessage = ErrorMessageFactory.create(getContext(), new CacheNotFoundException());
 
     assertThat(actualMessage, is(equalTo(expectedMessage)));
   }
