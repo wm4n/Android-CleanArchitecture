@@ -19,9 +19,13 @@ import android.content.Context;
 import com.wm4n.boilerplate.data.cache.UserCache;
 import com.wm4n.boilerplate.data.cache.UserCacheImpl;
 import com.wm4n.boilerplate.data.executor.JobExecutor;
+import com.wm4n.boilerplate.data.feature.restaurant.cache.RestaurantCache;
+import com.wm4n.boilerplate.data.feature.restaurant.cache.RestaurantCacheImpl;
+import com.wm4n.boilerplate.data.feature.restaurant.repository.RestaurantDataRepository;
 import com.wm4n.boilerplate.data.repository.UserDataRepository;
 import com.wm4n.boilerplate.domain.executor.PostExecutionThread;
 import com.wm4n.boilerplate.domain.executor.ThreadExecutor;
+import com.wm4n.boilerplate.domain.feature.restaurant.repository.RestaurantRepository;
 import com.wm4n.boilerplate.domain.repository.UserRepository;
 import com.wm4n.boilerplate.presentation.AndroidApplication;
 import com.wm4n.boilerplate.presentation.UIThread;
@@ -59,5 +63,15 @@ public class ApplicationModule {
 
   @Provides @Singleton UserRepository provideUserRepository(UserDataRepository userDataRepository) {
     return userDataRepository;
+  }
+
+  @Provides @Singleton
+  RestaurantRepository provideRestaurantRepository(RestaurantDataRepository repository) {
+    return repository;
+  }
+
+  @Provides @Singleton
+  RestaurantCache provideRestaurantCache(RestaurantCacheImpl cache) {
+    return cache;
   }
 }

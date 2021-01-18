@@ -18,7 +18,10 @@ package com.wm4n.boilerplate.presentation.internal.di.components;
 import android.content.Context;
 import com.wm4n.boilerplate.domain.executor.PostExecutionThread;
 import com.wm4n.boilerplate.domain.executor.ThreadExecutor;
+import com.wm4n.boilerplate.domain.feature.restaurant.model.Restaurant;
+import com.wm4n.boilerplate.domain.feature.restaurant.repository.RestaurantRepository;
 import com.wm4n.boilerplate.domain.repository.UserRepository;
+import com.wm4n.boilerplate.presentation.feature.restaurant.RestaurantListActivity;
 import com.wm4n.boilerplate.presentation.internal.di.modules.ApplicationModule;
 import com.wm4n.boilerplate.presentation.view.activity.BaseActivity;
 
@@ -33,9 +36,12 @@ import javax.inject.Singleton;
 public interface ApplicationComponent {
   void inject(BaseActivity baseActivity);
 
+  //void inject(RestaurantListActivity activity);
+
   //Exposed to sub-graphs.
   Context context();
   ThreadExecutor threadExecutor();
   PostExecutionThread postExecutionThread();
   UserRepository userRepository();
+  RestaurantRepository restaurantRepository();
 }

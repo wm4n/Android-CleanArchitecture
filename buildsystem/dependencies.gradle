@@ -14,7 +14,7 @@ ext {
   androidTargetSdkVersion = 29
   androidCompileSdkVersion = 29
 
-  androidX_appCompatVersion = '1.1.0-rc01' //'1.1.0' 有 WebView 在 5.x 裝置上 crash 問題
+  androidX_appCompatVersion = '1.2.0'
   androidX_recyclerViewVersion = '1.1.0'
   androidX_constraintVersion = '1.1.3'
   androidX_cardViewVersion = '1.0.0'
@@ -24,6 +24,7 @@ ext {
   androidX_roomVersion = '2.2.0-alpha02'
   androidX_lifecycleVersion = '2.2.0'
   androidX_workManagerVersion = '2.1.0'
+  androidX_swipeRefreshVersion = '1.1.0'
 
   //Libraries
   daggerVersion = '2.16'
@@ -59,61 +60,74 @@ ext {
   // Stream
   streamVersion = '1.2.1'
 
+  // Rating bar
+  ratingBarVersion = '1.4.0'
+
+  // Glide
+  glideVersion = '4.9.0'
+
   presentationDependencies = [
-      daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
-      dagger:             "com.google.dagger:dagger:${daggerVersion}",
-      recyclerView: 'androidx.recyclerview:recyclerview:1.0.0',
-      rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-      rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-      javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-      arrow:              "com.fernandocejas:arrow:${arrowVersion}",
-      // Stream
-      javaStream          : "com.annimon:stream:${streamVersion}",
+    appCompat      : "androidx.appcompat:appcompat:${androidX_appCompatVersion}",
+    recyclerView   : "androidx.recyclerview:recyclerview:${androidX_recyclerViewVersion}",
+    supportDesign  : "com.google.android.material:material:${androidX_supportDesign}",
+    swipeRefresh   : "androidx.swiperefreshlayout:swiperefreshlayout:${androidX_swipeRefreshVersion}",
+    daggerCompiler : "com.google.dagger:dagger-compiler:${daggerVersion}",
+    dagger         : "com.google.dagger:dagger:${daggerVersion}",
+    rxJava         : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+    rxAndroid      : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+    javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+    arrow          : "com.fernandocejas:arrow:${arrowVersion}",
+    // Stream
+    javaStream     : "com.annimon:stream:${streamVersion}",
+    // Rating Bar
+    ratingBar      : "me.zhanghai.android.materialratingbar:library:${ratingBarVersion}",
+    // Glide
+    glide          : "com.github.bumptech.glide:glide:${glideVersion}",
   ]
 
   presentationTestDependencies = [
-      mockito:            "org.mockito:mockito-core:${mockitoVersion}",
-      dexmaker:           "com.google.dexmaker:dexmaker:${dexmakerVersion}",
-      dexmakerMockito:    "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
-      espresso: 'androidx.test.espresso:espresso-core:3.1.0',
-      testingSupportLib:  "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
+    mockito          : "org.mockito:mockito-core:${mockitoVersion}",
+    dexmaker         : "com.google.dexmaker:dexmaker:${dexmakerVersion}",
+    dexmakerMockito  : "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
+    espresso         : 'androidx.test.espresso:espresso-core:3.1.0',
+    testingSupportLib: "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
   ]
 
   domainDependencies = [
-      javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-      javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
-      rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-      arrow:              "com.fernandocejas:arrow:${arrowVersion}"
+    javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+    javaxInject    : "javax.inject:javax.inject:${javaxInjectVersion}",
+    rxJava         : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+    arrow          : "com.fernandocejas:arrow:${arrowVersion}"
   ]
 
   domainTestDependencies = [
-      junit:              "junit:junit:${jUnitVersion}",
-      mockito:            "org.mockito:mockito-core:${mockitoVersion}",
-      assertj:            "org.assertj:assertj-core:${assertJVersion}"
+    junit  : "junit:junit:${jUnitVersion}",
+    mockito: "org.mockito:mockito-core:${mockitoVersion}",
+    assertj: "org.assertj:assertj-core:${assertJVersion}"
   ]
 
   dataDependencies = [
-      daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
-      dagger:             "com.google.dagger:dagger:${daggerVersion}",
-      okHttp:             "com.squareup.okhttp3:okhttp:${okHttpVersion}",
-      gson:               "com.google.code.gson:gson:${gsonVersion}",
-      rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-      rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-      javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-      javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
-      androidAnnotations: 'androidx.annotation:annotation:1.0.0',
-      // Stream
-      javaStream:         "com.annimon:stream:${streamVersion}",
+    daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
+    dagger            : "com.google.dagger:dagger:${daggerVersion}",
+    okHttp            : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+    gson              : "com.google.code.gson:gson:${gsonVersion}",
+    rxJava            : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+    rxAndroid         : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+    javaxAnnotation   : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+    javaxInject       : "javax.inject:javax.inject:${javaxInjectVersion}",
+    androidAnnotations: 'androidx.annotation:annotation:1.0.0',
+    // Stream
+    javaStream        : "com.annimon:stream:${streamVersion}",
   ]
 
   dataTestDependencies = [
-      junit:              "junit:junit:${jUnitVersion}",
-      assertj:            "org.assertj:assertj-core:${assertJVersion}",
-      mockito:            "org.mockito:mockito-core:${mockitoVersion}",
-      robolectric:        "org.robolectric:robolectric:${robolectricVersion}",
+    junit      : "junit:junit:${jUnitVersion}",
+    assertj    : "org.assertj:assertj-core:${assertJVersion}",
+    mockito    : "org.mockito:mockito-core:${mockitoVersion}",
+    robolectric: "org.robolectric:robolectric:${robolectricVersion}",
   ]
 
   developmentDependencies = [
-      leakCanary: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+    leakCanary: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
   ]
 }

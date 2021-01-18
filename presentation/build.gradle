@@ -40,7 +40,8 @@ android {
     abortOnError false
     ignoreWarnings true
     disable 'InvalidPackage'            //Some libraries have issues with this.
-    disable 'OldTargetApi'              //Lint gives this warning but SDK 20 would be Android L Beta.
+    disable 'OldTargetApi'
+    //Lint gives this warning but SDK 20 would be Android L Beta.
     disable 'IconDensities'             //For testing purpose. This is safe to remove.
     disable 'IconMissingDensityFolder'  //For testing purpose. This is safe to remove.
   }
@@ -71,9 +72,13 @@ dependencies {
 
   annotationProcessor presentationDependencies.daggerCompiler
   implementation presentationDependencies.dagger
+  implementation presentationDependencies.appCompat
   implementation presentationDependencies.recyclerView
+  implementation presentationDependencies.swipeRefresh
   implementation presentationDependencies.rxJava
   implementation presentationDependencies.rxAndroid
+  implementation presentationDependencies.ratingBar
+  implementation presentationDependencies.glide
   compileOnly presentationDependencies.javaxAnnotation
   implementation presentationDependencies.arrow
 

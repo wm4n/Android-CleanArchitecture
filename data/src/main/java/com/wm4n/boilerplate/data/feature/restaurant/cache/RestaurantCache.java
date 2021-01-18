@@ -15,7 +15,6 @@
  */
 package com.wm4n.boilerplate.data.feature.restaurant.cache;
 
-import com.wm4n.boilerplate.data.entity.UserEntity;
 import com.wm4n.boilerplate.data.feature.restaurant.entity.RestaurantEntity;
 
 import io.reactivex.Observable;

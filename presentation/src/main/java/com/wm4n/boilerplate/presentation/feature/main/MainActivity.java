@@ -2,6 +2,7 @@ package com.wm4n.boilerplate.presentation.feature.main;
 
 import android.os.Bundle;
 import com.wm4n.boilerplate.presentation.databinding.ActivityMainBinding;
+import com.wm4n.boilerplate.presentation.feature.restaurant.RestaurantListActivity;
 import com.wm4n.boilerplate.presentation.view.activity.BaseActivity;
 
 /**
@@ -16,7 +17,9 @@ public class MainActivity extends BaseActivity {
     if(viewBinding != null) {
       setContentView(viewBinding.getRoot());
       viewBinding.btnLoadData.setOnClickListener(v -> {
-        this.navigator.navigateToUserList(this);
+        //this.navigator.navigateToUserList(this);
+
+        startActivity(RestaurantListActivity.getLaunchIntent(MainActivity.this));
       });
     }
   }

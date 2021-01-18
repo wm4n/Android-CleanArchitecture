@@ -15,6 +15,7 @@
  */
 package com.wm4n.boilerplate.presentation.internal.di.components;
 
+import com.wm4n.boilerplate.presentation.feature.restaurant.RestaurantListActivity;
 import com.wm4n.boilerplate.presentation.internal.di.PerActivity;
 import com.wm4n.boilerplate.presentation.internal.di.modules.ActivityModule;
 import com.wm4n.boilerplate.presentation.internal.di.modules.UserModule;
@@ -32,4 +33,5 @@ import dagger.Component;
 public interface UserComponent extends ActivityComponent {
   void inject(UserListFragment userListFragment);
   void inject(UserDetailsFragment userDetailsFragment);
+  void inject(RestaurantListActivity activity);
 }

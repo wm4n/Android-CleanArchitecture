@@ -30,6 +30,11 @@
         android:name="com.wm4n.boilerplate.presentation.view.activity.UserDetailsActivity"
         android:label="@string/activity_title_user_details">
     </activity>
+
+    <activity
+      android:name=".feature.restaurant.RestaurantListActivity"
+      android:label="Res">
+    </activity>
   </application>
 
 </manifest>
