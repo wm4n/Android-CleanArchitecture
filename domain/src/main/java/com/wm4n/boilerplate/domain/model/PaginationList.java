@@ -86,4 +86,14 @@ public class PaginationList<T> implements Mergeable<PaginationList<T>> {
       content.addAll(target.getContent());
     }
   }
+
+  @Override
+  public String toString() {
+    return "PaginationList{" +
+        "recordCount=" + recordCount +
+        ", pageSize=" + pageSize +
+        ", page=" + page +
+        ", pageCount=" + pageCount +
+        '}';
+  }
 }

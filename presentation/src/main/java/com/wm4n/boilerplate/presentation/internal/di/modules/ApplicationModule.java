@@ -29,6 +29,7 @@ import com.wm4n.boilerplate.domain.feature.restaurant.repository.RestaurantRepos
 import com.wm4n.boilerplate.domain.repository.UserRepository;
 import com.wm4n.boilerplate.presentation.AndroidApplication;
 import com.wm4n.boilerplate.presentation.UIThread;
+import com.wm4n.boilerplate.presentation.navigation.Navigator;
 
 import dagger.Module;
 import dagger.Provides;

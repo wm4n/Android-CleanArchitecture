@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2017 Google Inc. All Rights Reserved.
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -90,7 +90,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
           LayoutInflater.from(parent.getContext()),
           parent,
           false);
-      return new LastItemViewHolder(binding);
+      return new LoadMoreItemViewHolder(binding);
     }
   }
 
@@ -99,8 +99,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     if(holder instanceof RegularItemViewHolder) {
       ((RegularItemViewHolder)holder).bind(mData.get(position), mSelectListener);
     }
-    else if(holder instanceof LastItemViewHolder) {
-      ((LastItemViewHolder)holder).bind(mHasMore, mLoadMoreListener);
+    else if(holder instanceof LoadMoreItemViewHolder) {
+      ((LoadMoreItemViewHolder)holder).bind(mHasMore, mLoadMoreListener);
     }
   }
 
@@ -115,23 +115,27 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     return mData.size() == position ? TYPE_LAST_ITEM : TYPE_NORMAL_ITEM;
   }
 
-  static class LastItemViewHolder extends RecyclerView.ViewHolder {
+  static class LoadMoreItemViewHolder extends RecyclerView.ViewHolder {
 
     RestaurantLastListItemBinding binding;
 
-    public LastItemViewHolder(RestaurantLastListItemBinding binding) {
+    public LoadMoreItemViewHolder(RestaurantLastListItemBinding binding) {
       super(binding.getRoot());
       this.binding = binding;
     }
 
-    public void bind(boolean isLast,
+    public void bind(boolean hasMore,
                      final OnRestaurantLoadMoreListener listener) {
 
-      binding.text.setText(isLast ? "It's the End" : "Load More");
+      Resources res = binding.text.getResources();
+      binding.text.setText(
+          hasMore ?
+              res.getString(R.string.restaurant_load_more) :
+              res.getString(R.string.restaurant_list_end));
 
       // Click listener
       itemView.setOnClickListener(view -> {
-        if (listener != null) {
+        if (listener != null && hasMore) {
           listener.loadMore();
         }
       });

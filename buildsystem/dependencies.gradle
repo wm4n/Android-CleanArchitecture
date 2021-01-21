@@ -19,7 +19,7 @@ ext {
   androidX_constraintVersion = '1.1.3'
   androidX_cardViewVersion = '1.0.0'
   androidX_fragmentVersion = '1.2.4'
-  androidX_supportDesign = '1.0.0'
+  androidX_supportDesign = '1.2.1'
   androidX_flexboxVersion = '1.1.0'
   androidX_roomVersion = '2.2.0-alpha02'
   androidX_lifecycleVersion = '2.2.0'

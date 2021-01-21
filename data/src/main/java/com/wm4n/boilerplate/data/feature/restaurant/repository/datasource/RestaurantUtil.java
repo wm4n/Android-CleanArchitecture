@@ -69,8 +69,8 @@ public class RestaurantUtil {
     /**
      * Create a random RestaurantEntity POJO.
      */
-    public static RestaurantEntity getRandom(Context context) {
-        RestaurantEntity restaurant = new RestaurantEntity(UUID.randomUUID().toString());
+    public static RestaurantEntity getRandom(Context context, String id) {
+        RestaurantEntity restaurant = new RestaurantEntity(id == null || id.isEmpty() ? UUID.randomUUID().toString() : id);
         Random random = new Random();
 
         // Cities (first element is 'Any')

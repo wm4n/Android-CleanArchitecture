@@ -33,7 +33,12 @@
 
     <activity
       android:name=".feature.restaurant.RestaurantListActivity"
-      android:label="Res">
+      android:label="@string/restaurant_list_label">
+    </activity>
+
+    <activity
+      android:name=".feature.restaurant.RestaurantDetailsActivity"
+      android:label="@string/restaurant_details_label">
     </activity>
   </application>
 

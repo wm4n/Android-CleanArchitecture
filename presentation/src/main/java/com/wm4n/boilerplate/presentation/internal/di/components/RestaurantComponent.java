@@ -15,7 +15,6 @@
  */
 package com.wm4n.boilerplate.presentation.internal.di.components;
 
-import com.wm4n.boilerplate.presentation.feature.restaurant.RestaurantDetailsActivity;
 import com.wm4n.boilerplate.presentation.feature.restaurant.RestaurantListActivity;
 import com.wm4n.boilerplate.presentation.internal.di.PerActivity;
 import com.wm4n.boilerplate.presentation.internal.di.modules.ActivityModule;
@@ -27,13 +26,9 @@ import dagger.Component;
 
 /**
  * A scope {@link PerActivity} component.
- * Injects user specific Fragments.
  */
 @PerActivity
 @Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class, UserModule.class})
-public interface UserComponent extends ActivityComponent {
-  void inject(UserListFragment userListFragment);
-  void inject(UserDetailsFragment userDetailsFragment);
+public interface RestaurantComponent extends ActivityComponent {
   void inject(RestaurantListActivity activity);
-  void inject(RestaurantDetailsActivity activity);
 }

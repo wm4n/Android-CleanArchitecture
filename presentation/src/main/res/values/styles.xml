@@ -11,6 +11,11 @@
     <item name="android:actionOverflowButtonStyle">@style/AppTheme.Overflow</item>
   </style>
 
+  <style name="AppTheme.Title">
+    <item name="android:fontFamily">sans-serif-medium</item>
+    <item name="android:textSize">20sp</item>
+  </style>
+
   <style name="AppTheme.Overflow" parent="Base.Widget.AppCompat.ActionButton.Overflow">
     <item name="android:padding">0dp</item>
     <item name="android:tint">@android:color/white</item>
@@ -76,6 +81,11 @@
     <item name="android:layout_height">wrap_content</item>
     <item name="android:layout_marginTop">@dimen/header_margin</item>
     <item name="android:textStyle">bold</item>
+  </style>
+
+  <style name="AppTheme.PizzaGuy">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">150dp</item>
   </style>
 
 </resources>

@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.wm4n.boilerplate.presentation.AndroidApplication;
 import com.wm4n.boilerplate.presentation.internal.di.components.ApplicationComponent;
 import com.wm4n.boilerplate.presentation.internal.di.modules.ActivityModule;
@@ -14,7 +17,7 @@ import javax.inject.Inject;
 /**
  * Base {@link android.app.Activity} class for every Activity in this application.
  */
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends AppCompatActivity {
 
   @Inject
   protected Navigator navigator;

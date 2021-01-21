@@ -4,31 +4,26 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.wm4n.boilerplate.domain.feature.restaurant.model.Restaurant;
 import com.wm4n.boilerplate.presentation.view.InvokeCallback;
-import com.wm4n.boilerplate.presentation.view.InvokeCallback1;
 
-import java.util.List;
-
-public interface RestaurantListContract {
+public interface RestaurantDetailsContract {
 
   interface View {
 
     void renderContentLoading();
 
-    void renderList(
-        @NonNull List<Restaurant> data,
-        boolean hasMorePage,
-        @Nullable InvokeCallback1<Restaurant> onSelected,
-        @Nullable InvokeCallback onLoadNextPage,
-        @Nullable InvokeCallback onRefreshList);
-
-    Context context();
+    void renderDetail(
+        @NonNull Restaurant restaurant,
+        @Nullable InvokeCallback onAddRating);
   }
 
   interface Presenter {
 
-    void setView(View view);
+    void setRestaurant(String restaurantId);
+
+    void setView(RestaurantDetailsContract.View view);
 
     /**
      * Method that indicates views are ready in the Activity or Fragment. Usually happens after bind

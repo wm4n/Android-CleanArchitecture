@@ -17,6 +17,11 @@ package com.wm4n.boilerplate.presentation.navigation;
 
 import android.content.Context;
 import android.content.Intent;
+
+import androidx.annotation.NonNull;
+
+import com.wm4n.boilerplate.presentation.feature.restaurant.RestaurantDetailsActivity;
+import com.wm4n.boilerplate.presentation.feature.restaurant.RestaurantDetailsContract;
 import com.wm4n.boilerplate.presentation.view.activity.UserDetailsActivity;
 import com.wm4n.boilerplate.presentation.view.activity.UserListActivity;
 import javax.inject.Inject;
@@ -31,6 +36,10 @@ public class Navigator {
   @Inject
   public Navigator() {
     //empty
+  }
+
+  public void toRestaurantDetails(@NonNull Context context, @NonNull String restaurantId) {
+    context.startActivity(RestaurantDetailsActivity.getLaunchIntent(context, restaurantId));
   }
 
   /**

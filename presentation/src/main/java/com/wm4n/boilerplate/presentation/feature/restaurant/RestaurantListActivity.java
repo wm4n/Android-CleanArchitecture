@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.wm4n.boilerplate.domain.feature.restaurant.model.Restaurant;
 import com.wm4n.boilerplate.presentation.AndroidApplication;
 import com.wm4n.boilerplate.presentation.databinding.RestaurantListBinding;
-import com.wm4n.boilerplate.presentation.internal.di.components.DaggerActivityComponent;
 import com.wm4n.boilerplate.presentation.internal.di.components.DaggerUserComponent;
 import com.wm4n.boilerplate.presentation.internal.di.components.UserComponent;
 import com.wm4n.boilerplate.presentation.internal.di.modules.ActivityModule;
 import com.wm4n.boilerplate.presentation.view.InvokeCallback;
 import com.wm4n.boilerplate.presentation.view.InvokeCallback1;
+import com.wm4n.boilerplate.presentation.view.activity.BaseActivity;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ import javax.inject.Inject;
 
 import io.reactivex.annotations.NonNull;
 
-public class RestaurantListActivity extends AppCompatActivity implements RestaurantListContract.View {
+public class RestaurantListActivity extends BaseActivity implements RestaurantListContract.View {
 
   public static Intent getLaunchIntent(Context context) {
     return new Intent(context, RestaurantListActivity.class);
@@ -52,12 +52,14 @@ public class RestaurantListActivity extends AppCompatActivity implements Restaur
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     initializeInjector();
     super.onCreate(savedInstanceState);
+    this.getApplicationComponent().inject(this);
     userComponent.inject(this);
 
     mViewBinding = RestaurantListBinding.inflate(getLayoutInflater());
     setContentView(mViewBinding.getRoot());
 
     initRecyclerView();
+    mPresenter.setView(this);
 
     Looper.myQueue()
         .addIdleHandler(
@@ -92,11 +94,17 @@ public class RestaurantListActivity extends AppCompatActivity implements Restaur
     mViewBinding.list.setLayoutManager(new LinearLayoutManager(this));
     mViewBinding.list.setAdapter(mAdapter);
 
+    mViewBinding.swipeRefresh.setProgressViewOffset(false, 0, 500);
     mViewBinding.swipeRefresh.setOnRefreshListener(() -> {
       if(mOnRefreshList != null) {
         mOnRefreshList.invoke();
       }
     });
+  }
+
+  @Override
+  public void renderContentLoading() {
+    mViewBinding.swipeRefresh.setRefreshing(true);
   }
 
   @Override
@@ -106,11 +114,18 @@ public class RestaurantListActivity extends AppCompatActivity implements Restaur
       @Nullable InvokeCallback1<Restaurant> onSelected,
       @Nullable InvokeCallback onLoadNextPage,
       @Nullable InvokeCallback onRefreshList) {
+    mViewBinding.swipeRefresh.setRefreshing(false);
     mOnSelectedCallback = onSelected;
     mLoadNextPage = onLoadNextPage;
     mOnRefreshList = onRefreshList;
     if(mAdapter != null) {
       mAdapter.updateData(data, hasMorePage);
+      mAdapter.notifyItemChanged(mAdapter.getItemCount() - 1);
     }
+  }
+
+  @Override
+  public Context context() {
+    return this;
   }
 }

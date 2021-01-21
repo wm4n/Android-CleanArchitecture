@@ -23,6 +23,7 @@ import com.wm4n.boilerplate.domain.feature.restaurant.repository.RestaurantRepos
 import com.wm4n.boilerplate.domain.repository.UserRepository;
 import com.wm4n.boilerplate.presentation.feature.restaurant.RestaurantListActivity;
 import com.wm4n.boilerplate.presentation.internal.di.modules.ApplicationModule;
+import com.wm4n.boilerplate.presentation.navigation.Navigator;
 import com.wm4n.boilerplate.presentation.view.activity.BaseActivity;
 
 import dagger.Component;
@@ -39,6 +40,7 @@ public interface ApplicationComponent {
   //void inject(RestaurantListActivity activity);
 
   //Exposed to sub-graphs.
+  Navigator navigator();
   Context context();
   ThreadExecutor threadExecutor();
   PostExecutionThread postExecutionThread();

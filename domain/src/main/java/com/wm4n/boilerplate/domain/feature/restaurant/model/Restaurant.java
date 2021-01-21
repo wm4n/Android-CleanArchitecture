@@ -2,6 +2,7 @@ package com.wm4n.boilerplate.domain.feature.restaurant.model;
 
 public class Restaurant {
 
+  private final String id;
   private String name;
   private String city;
   private String category;
@@ -10,10 +11,12 @@ public class Restaurant {
   private int numRatings;
   private double avgRating;
 
-  public Restaurant() {
+  public Restaurant(String id) {
+    this.id = id;
   }
 
-  public Restaurant(String name, String city, String category, String photo, int price, int numRatings, double avgRating) {
+  public Restaurant(String id, String name, String city, String category, String photo, int price, int numRatings, double avgRating) {
+    this.id = id;
     this.name = name;
     this.city = city;
     this.category = category;
@@ -21,6 +24,10 @@ public class Restaurant {
     this.price = price;
     this.numRatings = numRatings;
     this.avgRating = avgRating;
+  }
+
+  public String getId() {
+    return id;
   }
 
   public String getName() {

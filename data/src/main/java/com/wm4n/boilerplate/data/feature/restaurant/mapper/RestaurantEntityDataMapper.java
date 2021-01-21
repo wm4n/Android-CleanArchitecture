@@ -29,7 +29,7 @@ public class RestaurantEntityDataMapper {
   public Restaurant transform(RestaurantEntity entity) {
     Restaurant restaurant = null;
     if (entity != null) {
-      restaurant = new Restaurant();
+      restaurant = new Restaurant(entity.getId());
       restaurant.setName(entity.getName());
       restaurant.setCity(entity.getCity());
       restaurant.setCategory(entity.getCategory());
