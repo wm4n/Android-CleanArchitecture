@@ -9,6 +9,8 @@ import javax.inject.Inject;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 
+import static com.wm4n.boilerplate.presentation.view.AndroidViewInterface.VIEW_OK;
+
 @PerActivity
 public class RestaurantDetailsPresenter implements RestaurantDetailsContract.Presenter {
 
@@ -51,13 +53,19 @@ public class RestaurantDetailsPresenter implements RestaurantDetailsContract.Pre
     mGetRestaurantDetailsUseCase.dispose();
   }
 
+  @Override
+  public void onCloseClicked() {
+    if(mView == null) return;
+    mView.closeView(VIEW_OK);
+  }
+
+  @Override
+  public void onAddRatingClicked() {
+
+  }
+
   private void load(final String restaurantId) {
-    if(mView == null) {
-      return;
-    }
-    if(mRestaurant == null) {
-      mView.renderContentLoading();
-    }
+    if(mView == null) return;
     mGetRestaurantDetailsUseCase.execute(new DisposableObserver<Restaurant>() {
       @Override
       public void onNext(@NonNull Restaurant result) {

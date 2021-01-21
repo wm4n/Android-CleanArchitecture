@@ -18,7 +18,6 @@ package com.wm4n.boilerplate.test.presenter;
 import android.content.Context;
 import com.wm4n.boilerplate.domain.interactor.GetUserList;
 import com.wm4n.boilerplate.presentation.mapper.UserModelDataMapper;
-import com.wm4n.boilerplate.presentation.presenter.UserListPresenter;
 import com.wm4n.boilerplate.presentation.view.UserListView;
 import io.reactivex.observers.DisposableObserver;
 import org.junit.Before;

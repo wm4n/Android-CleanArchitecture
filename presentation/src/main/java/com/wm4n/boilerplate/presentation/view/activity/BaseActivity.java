@@ -3,30 +3,27 @@ package com.wm4n.boilerplate.presentation.view.activity;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.SparseArray;
+import android.view.View;
 
+import androidx.annotation.CallSuper;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.wm4n.boilerplate.presentation.AndroidApplication;
 import com.wm4n.boilerplate.presentation.internal.di.components.ApplicationComponent;
 import com.wm4n.boilerplate.presentation.internal.di.modules.ActivityModule;
-import com.wm4n.boilerplate.presentation.navigation.Navigator;
-
-import javax.inject.Inject;
+import com.wm4n.boilerplate.presentation.view.OnActivityResultCallback;
 
 /**
  * Base {@link android.app.Activity} class for every Activity in this application.
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-  @Inject
-  protected Navigator navigator;
-
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    this.getApplicationComponent().inject(this);
-  }
+  private static final String ACTION_SIMPLE_POPUP = "ACTION_SIMPLE_POPUP";
 
   /**
    * Adds a {@link Fragment} to this activity's layout.
@@ -56,5 +53,90 @@ public abstract class BaseActivity extends AppCompatActivity {
    */
   protected ActivityModule getActivityModule() {
     return new ActivityModule(this);
+  }
+
+  /**
+   * Render a SnackBar message for a short period
+   *
+   * @param message message to display
+   */
+  protected Snackbar renderSnackBarMessage(CharSequence message) {
+    View v = getCurrentFocus();
+    if (v != null) {
+      final Snackbar snackbar = Snackbar.make(v, message, Snackbar.LENGTH_SHORT);
+      snackbar.show();
+      return snackbar;
+    }
+    return null;
+  }
+
+  /**
+   * Get application context
+   *
+   * @return application context
+   */
+  public Context context() {
+    return getApplicationContext();
+  }
+
+  /**
+   * Get Activity itself
+   *
+   * @return activity
+   */
+  public Activity activity() {
+    return this;
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    // Check actions that can be handled here
+    if (resultCode == RESULT_OK) {
+      if (data != null && data.hasExtra(ACTION_SIMPLE_POPUP)) {
+        CharSequence message = data.getCharSequenceExtra(ACTION_SIMPLE_POPUP);
+        if (message == null) {
+          message = data.getStringExtra(ACTION_SIMPLE_POPUP);
+        }
+        renderSnackBarMessage(message);
+      }
+    }
+
+    final OnActivityResultCallback callback = mOnActivityResultCallbackList.get(requestCode);
+    if (callback != null) {
+      callback.onActivityResult(requestCode, resultCode, data);
+    }
+  }
+
+  /**
+   * For storing onActivityResult's callback
+   */
+  private final SparseArray<OnActivityResultCallback> mOnActivityResultCallbackList =
+      new SparseArray<>(5);
+
+  /**
+   * For storing onActivityResult's callback
+   */
+  @CallSuper
+  public void setActivityResultCallback(Integer requestCode, OnActivityResultCallback callback) {
+    mOnActivityResultCallbackList.put(requestCode, callback);
+  }
+
+  /**
+   * Implementation of BaseViewInterface's setReturnResult
+   *
+   * @param resultCode Activity's resultCode
+   * @param data data to pass back to onActivityResult
+   */
+  public void setReturnResult(int resultCode, Intent data) {
+    setResult(resultCode, data);
+  }
+
+  public void closeView(Integer resultCode) {
+    if (resultCode != null) {
+      setResult(resultCode);
+    }
+    finish();
   }
 }

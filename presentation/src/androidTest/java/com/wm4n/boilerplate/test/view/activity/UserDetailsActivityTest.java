@@ -19,7 +19,6 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import com.wm4n.boilerplate.presentation.R;
-import com.wm4n.boilerplate.presentation.view.activity.UserDetailsActivity;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;

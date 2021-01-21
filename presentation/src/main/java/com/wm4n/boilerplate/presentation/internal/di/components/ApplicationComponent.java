@@ -25,6 +25,7 @@ import com.wm4n.boilerplate.presentation.feature.restaurant.RestaurantListActivi
 import com.wm4n.boilerplate.presentation.internal.di.modules.ApplicationModule;
 import com.wm4n.boilerplate.presentation.navigation.Navigator;
 import com.wm4n.boilerplate.presentation.view.activity.BaseActivity;
+import com.wm4n.boilerplate.presentation.view.activity.PresentationBaseActivity;
 
 import dagger.Component;
 import javax.inject.Singleton;
@@ -35,9 +36,7 @@ import javax.inject.Singleton;
 @Singleton // Constraints this component to one-per-application or unscoped bindings.
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
-  void inject(BaseActivity baseActivity);
-
-  //void inject(RestaurantListActivity activity);
+  void inject(PresentationBaseActivity activity);
 
   //Exposed to sub-graphs.
   Navigator navigator();

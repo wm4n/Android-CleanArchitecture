@@ -6,18 +6,14 @@ import android.os.Bundle;
 import android.os.Looper;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.wm4n.boilerplate.domain.feature.restaurant.model.Restaurant;
-import com.wm4n.boilerplate.presentation.AndroidApplication;
 import com.wm4n.boilerplate.presentation.databinding.RestaurantListBinding;
-import com.wm4n.boilerplate.presentation.internal.di.components.DaggerUserComponent;
-import com.wm4n.boilerplate.presentation.internal.di.components.UserComponent;
-import com.wm4n.boilerplate.presentation.internal.di.modules.ActivityModule;
 import com.wm4n.boilerplate.presentation.view.InvokeCallback;
 import com.wm4n.boilerplate.presentation.view.InvokeCallback1;
 import com.wm4n.boilerplate.presentation.view.activity.BaseActivity;
+import com.wm4n.boilerplate.presentation.view.activity.PresentationBaseActivity;
 
 import java.util.List;
 
@@ -25,7 +21,7 @@ import javax.inject.Inject;
 
 import io.reactivex.annotations.NonNull;
 
-public class RestaurantListActivity extends BaseActivity implements RestaurantListContract.View {
+public class RestaurantListActivity extends PresentationBaseActivity implements RestaurantListContract.View {
 
   public static Intent getLaunchIntent(Context context) {
     return new Intent(context, RestaurantListActivity.class);
@@ -37,23 +33,12 @@ public class RestaurantListActivity extends BaseActivity implements RestaurantLi
   private InvokeCallback mLoadNextPage;
   private InvokeCallback mOnRefreshList;
 
-  private UserComponent userComponent;
-
   @Inject RestaurantListPresenter mPresenter;
-
-  private void initializeInjector() {
-    this.userComponent = DaggerUserComponent.builder()
-        .applicationComponent(((AndroidApplication) getApplication()).getApplicationComponent())
-        .activityModule(new ActivityModule(this))
-        .build();
-  }
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
-    initializeInjector();
     super.onCreate(savedInstanceState);
-    this.getApplicationComponent().inject(this);
-    userComponent.inject(this);
+    this.getComponent().inject(this);
 
     mViewBinding = RestaurantListBinding.inflate(getLayoutInflater());
     setContentView(mViewBinding.getRoot());

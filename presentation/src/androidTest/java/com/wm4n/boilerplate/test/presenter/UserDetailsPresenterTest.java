@@ -19,7 +19,6 @@ import android.content.Context;
 import com.wm4n.boilerplate.domain.interactor.GetUserDetails;
 import com.wm4n.boilerplate.domain.interactor.GetUserDetails.Params;
 import com.wm4n.boilerplate.presentation.mapper.UserModelDataMapper;
-import com.wm4n.boilerplate.presentation.presenter.UserDetailsPresenter;
 import com.wm4n.boilerplate.presentation.view.UserDetailsView;
 import io.reactivex.observers.DisposableObserver;
 import org.junit.Before;
