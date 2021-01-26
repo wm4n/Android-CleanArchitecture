@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.wm4n.boilerplate.domain.feature.restaurant.model.Restaurant;
+import com.wm4n.boilerplate.presentation.view.AndroidViewInterface;
 import com.wm4n.boilerplate.presentation.view.InvokeCallback;
 import com.wm4n.boilerplate.presentation.view.InvokeCallback1;
 
@@ -12,7 +13,7 @@ import java.util.List;
 
 public interface RestaurantListContract {
 
-  interface View {
+  interface View extends AndroidViewInterface {
 
     void renderContentLoading();
 

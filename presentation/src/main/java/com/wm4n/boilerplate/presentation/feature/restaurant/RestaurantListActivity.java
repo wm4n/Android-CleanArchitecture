@@ -12,7 +12,6 @@ import com.wm4n.boilerplate.domain.feature.restaurant.model.Restaurant;
 import com.wm4n.boilerplate.presentation.databinding.RestaurantListBinding;
 import com.wm4n.boilerplate.presentation.view.InvokeCallback;
 import com.wm4n.boilerplate.presentation.view.InvokeCallback1;
-import com.wm4n.boilerplate.presentation.view.activity.BaseActivity;
 import com.wm4n.boilerplate.presentation.view.activity.PresentationBaseActivity;
 
 import java.util.List;
@@ -109,8 +108,4 @@ public class RestaurantListActivity extends PresentationBaseActivity implements 
     }
   }
 
-  @Override
-  public Context context() {
-    return this;
-  }
 }

@@ -28,7 +28,6 @@ import com.wm4n.boilerplate.data.feature.restaurant.repository.datasource.Restau
 import com.wm4n.boilerplate.domain.feature.restaurant.model.Restaurant;
 import com.wm4n.boilerplate.presentation.R;
 import com.wm4n.boilerplate.presentation.databinding.RestaurantDetailBinding;
-import com.wm4n.boilerplate.presentation.internal.di.components.MainActivityComponent;
 import com.wm4n.boilerplate.presentation.view.InvokeCallback;
 import com.wm4n.boilerplate.presentation.view.activity.PresentationBaseActivity;
 
@@ -46,6 +45,7 @@ public class RestaurantDetailsActivity extends PresentationBaseActivity implemen
   public static final String KEY_RESTAURANT_ID = "key_restaurant_id";
 
   private RestaurantDetailBinding mViewBinding;
+  private InvokeCallback mOnAddRating;
 
   @Inject
   RestaurantDetailsPresenter mPresenter;
@@ -58,11 +58,7 @@ public class RestaurantDetailsActivity extends PresentationBaseActivity implemen
     mViewBinding = RestaurantDetailBinding.inflate(getLayoutInflater());
     setContentView(mViewBinding.getRoot());
 
-    mViewBinding.restaurantButtonBack.setOnClickListener(v -> {
-        if(mPresenter != null) {
-            mPresenter.onCloseClicked();
-        }
-    });
+    mViewBinding.restaurantButtonBack.setOnClickListener(v -> closeView(VIEW_OK));
     // Get restaurant ID from extras
     String restaurantId = null;
     if (getIntent().getExtras() != null) {
@@ -85,15 +81,27 @@ public class RestaurantDetailsActivity extends PresentationBaseActivity implemen
             });
   }
 
+  @Override
+  protected void onDestroy() {
+    mPresenter.viewDestroy();
+    mPresenter.cleanup();
+    super.onDestroy();
+  }
 
   @Override
   public void renderDetail(@NonNull Restaurant restaurant, @Nullable InvokeCallback onAddRating) {
+    mOnAddRating = onAddRating;
     mViewBinding.restaurantName.setText(restaurant.getName());
     mViewBinding.restaurantRating.setRating((float) restaurant.getAvgRating());
     mViewBinding.restaurantNumRatings.setText(getString(R.string.fmt_num_ratings, restaurant.getNumRatings()));
     mViewBinding.restaurantCity.setText(restaurant.getCity());
     mViewBinding.restaurantCategory.setText(restaurant.getCategory());
     mViewBinding.restaurantPrice.setText(RestaurantUtil.getPriceString(restaurant));
+    mViewBinding.fabShowRatingDialog.setOnClickListener(v -> {
+      if(mPresenter != null && mOnAddRating != null) {
+        mOnAddRating.invoke();
+      }
+    });
 
     // Background image
     Glide.with(mViewBinding.restaurantImage.getContext())

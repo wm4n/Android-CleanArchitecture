@@ -6,16 +6,21 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.CallSuper;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.wm4n.boilerplate.presentation.AndroidApplication;
 import com.wm4n.boilerplate.presentation.internal.di.components.ApplicationComponent;
 import com.wm4n.boilerplate.presentation.internal.di.modules.ActivityModule;
+import com.wm4n.boilerplate.presentation.view.InvokeCallback;
 import com.wm4n.boilerplate.presentation.view.OnActivityResultCallback;
 
 /**
@@ -110,6 +115,30 @@ public abstract class BaseActivity extends AppCompatActivity {
   }
 
   /**
+   * Render a full page error/failure screen with specified text and button action
+   *
+   * @param failureText Primary failure text to display
+   * @param buttonText
+   * @param callback
+   */
+  public void renderFailureView(
+      @NonNull CharSequence failureText, @Nullable CharSequence buttonText, @Nullable InvokeCallback callback) {
+  }
+
+
+  public void renderPopupView(
+      @NonNull CharSequence failureText, @Nullable CharSequence buttonText, @Nullable InvokeCallback callback) {
+    View view = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
+    if(view != null) {
+      Snackbar snackbar = Snackbar.make(view, failureText, Snackbar.LENGTH_SHORT);
+      if (!TextUtils.isEmpty(buttonText) && callback != null) {
+        snackbar.setAction(buttonText, v -> callback.invoke());
+      }
+      snackbar.show();
+    }
+  }
+
+  /**
    * For storing onActivityResult's callback
    */
   private final SparseArray<OnActivityResultCallback> mOnActivityResultCallbackList =
@@ -139,4 +168,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
     finish();
   }
+
+
+
 }

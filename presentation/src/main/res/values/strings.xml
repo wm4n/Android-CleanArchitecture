@@ -6,18 +6,10 @@
   <string name="restaurant_load_more">Load more</string>
   <string name="restaurant_list_end">It\'s the end</string>
 
-  <string name="activity_title_user_list">Users List</string>
-  <string name="activity_title_user_details">User Details</string>
-
   <string name="restaurant_list_label">Restaurant List</string>
   <string name="restaurant_details_label">Restaurant Details</string>
 
   <string name="btn_text_load_data">Load Sample Data</string>
-  <string name="btn_text_retry">Retry</string>
-
-  <string name="view_text_email">Email:</string>
-  <string name="view_text_followers">Followers:</string>
-  <string name="view_text_description">Description:</string>
 
   <string name="banner_content_description">Banner view</string>
 

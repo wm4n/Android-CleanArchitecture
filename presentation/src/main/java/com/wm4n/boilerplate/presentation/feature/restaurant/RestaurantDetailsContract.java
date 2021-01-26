@@ -36,10 +36,6 @@ public interface RestaurantDetailsContract {
 
     /** Method that indicates resources should be clean up */
     void cleanup();
-
-    void onCloseClicked();
-
-    void onAddRatingClicked();
   }
 
 }

@@ -1,7 +1,5 @@
 package com.wm4n.boilerplate.presentation.view;
 
-import android.content.Intent;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -16,7 +14,7 @@ public interface BaseViewInterface extends AndroidViewInterface {
    *     is given, the button should hide
    */
   default void renderFailureView(
-      @NonNull String failureText, @Nullable String buttonText, @Nullable InvokeCallback callback) {}
+      @NonNull CharSequence failureText, @Nullable CharSequence buttonText, @Nullable InvokeCallback callback) {}
 
   /**
    * Render a popup failure view without interrupting the current displaying view (If supported)
@@ -27,6 +25,6 @@ public interface BaseViewInterface extends AndroidViewInterface {
    *     is given, the button should hide
    */
   default void renderPopupView(
-      @NonNull String failureText, @Nullable String buttonText, @Nullable InvokeCallback callback) {}
+      @NonNull CharSequence failureText, @Nullable CharSequence buttonText, @Nullable InvokeCallback callback) {}
 
 }

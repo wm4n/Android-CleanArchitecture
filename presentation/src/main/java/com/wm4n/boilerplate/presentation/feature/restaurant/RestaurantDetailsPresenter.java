@@ -3,13 +3,12 @@ package com.wm4n.boilerplate.presentation.feature.restaurant;
 import com.wm4n.boilerplate.domain.feature.restaurant.interactor.GetRestaurantDetails;
 import com.wm4n.boilerplate.domain.feature.restaurant.model.Restaurant;
 import com.wm4n.boilerplate.presentation.internal.di.PerActivity;
+import com.wm4n.boilerplate.presentation.view.AndroidViewInterface;
 
 import javax.inject.Inject;
 
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
-
-import static com.wm4n.boilerplate.presentation.view.AndroidViewInterface.VIEW_OK;
 
 @PerActivity
 public class RestaurantDetailsPresenter implements RestaurantDetailsContract.Presenter {
@@ -53,16 +52,6 @@ public class RestaurantDetailsPresenter implements RestaurantDetailsContract.Pre
     mGetRestaurantDetailsUseCase.dispose();
   }
 
-  @Override
-  public void onCloseClicked() {
-    if(mView == null) return;
-    mView.closeView(VIEW_OK);
-  }
-
-  @Override
-  public void onAddRatingClicked() {
-
-  }
 
   private void load(final String restaurantId) {
     if(mView == null) return;
@@ -73,7 +62,18 @@ public class RestaurantDetailsPresenter implements RestaurantDetailsContract.Pre
         if(mView != null) {
           mView.renderDetail(
               mRestaurant,
-              () -> {});
+              () -> {
+                if(mView != null) {
+                  mView.renderPopupView(
+                      "Add rating (To be implemented)",
+                      "Close",
+                      () -> {
+                        if(mView != null) {
+                          mView.closeView(AndroidViewInterface.VIEW_OK);
+                        }
+                  });
+                }
+              });
         }
       }
 

@@ -72,7 +72,7 @@ public class RestaurantListPresenter implements RestaurantListContract.Presenter
               hasMorePage,
               restaurant ->  {
                 if(mView != null && mView.context() != null) {
-                  mNavigator.toRestaurantDetails(mView.context(), restaurant.getId());
+                  mNavigator.toRestaurantDetails(mView.activity(), restaurant.getId());
                 }
               },
               () -> {
