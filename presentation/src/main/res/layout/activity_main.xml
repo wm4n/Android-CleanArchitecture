@@ -7,6 +7,7 @@
   <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FAFAFA"
     android:fillViewport="true">
 
     <LinearLayout
@@ -31,7 +32,10 @@
         android:id="@+id/btn_LoadData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_text_load_data" />
+        android:layout_marginTop="16dp"
+        android:paddingVertical="8dp"
+        android:text="@string/btn_text_load_data"
+        android:textSize="16sp"/>
 
       <View
         android:layout_width="match_parent"
@@ -42,6 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autoLink="web"
+        android:textColorLink="@color/colorPrimaryDark"
         android:gravity="center"
         android:text="@string/url" />
 
