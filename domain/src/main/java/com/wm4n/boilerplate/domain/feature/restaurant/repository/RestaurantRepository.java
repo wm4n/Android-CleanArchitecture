@@ -32,7 +32,7 @@ public interface RestaurantRepository {
   /**
    * Get an {@link Observable} which will emit a {@link Restaurant}.
    *
-   * @param id The user id used to retrieve restaurant data.
+   * @param id The restaurant id used to retrieve restaurant data.
    */
   Observable<Restaurant> getRestaurant(String id);
 }

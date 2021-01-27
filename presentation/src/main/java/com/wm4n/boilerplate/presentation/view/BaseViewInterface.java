@@ -17,7 +17,7 @@ public interface BaseViewInterface extends AndroidViewInterface {
       @NonNull CharSequence failureText, @Nullable CharSequence buttonText, @Nullable InvokeCallback callback) {}
 
   /**
-   * Render a popup failure view without interrupting the current displaying view (If supported)
+   * Render a popup failure view without interrupting the current displaying view (if view supported)
    *
    * @param failureText primary failure message
    * @param buttonText optional action button text

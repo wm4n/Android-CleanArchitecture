@@ -42,7 +42,7 @@ public class ErrorMessageFactory {
     if (exception instanceof NetworkConnectionException) {
       message = context.getString(R.string.exception_message_no_connection);
     } else if (exception instanceof CacheNotFoundException) {
-      message = context.getString(R.string.exception_message_user_not_found);
+      message = context.getString(R.string.exception_message_not_found);
     }
 
     return message;

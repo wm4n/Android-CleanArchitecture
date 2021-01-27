@@ -16,19 +16,17 @@
 package com.wm4n.boilerplate.presentation.internal.di.components;
 
 import android.content.Context;
+
 import com.wm4n.boilerplate.domain.executor.PostExecutionThread;
 import com.wm4n.boilerplate.domain.executor.ThreadExecutor;
-import com.wm4n.boilerplate.domain.feature.restaurant.model.Restaurant;
 import com.wm4n.boilerplate.domain.feature.restaurant.repository.RestaurantRepository;
-import com.wm4n.boilerplate.domain.repository.UserRepository;
-import com.wm4n.boilerplate.presentation.feature.restaurant.RestaurantListActivity;
 import com.wm4n.boilerplate.presentation.internal.di.modules.ApplicationModule;
 import com.wm4n.boilerplate.presentation.navigation.Navigator;
-import com.wm4n.boilerplate.presentation.view.activity.BaseActivity;
 import com.wm4n.boilerplate.presentation.view.activity.PresentationBaseActivity;
 
-import dagger.Component;
 import javax.inject.Singleton;
+
+import dagger.Component;
 
 /**
  * A component whose lifetime is the life of the application.
@@ -43,6 +41,5 @@ public interface ApplicationComponent {
   Context context();
   ThreadExecutor threadExecutor();
   PostExecutionThread postExecutionThread();
-  UserRepository userRepository();
   RestaurantRepository restaurantRepository();
 }

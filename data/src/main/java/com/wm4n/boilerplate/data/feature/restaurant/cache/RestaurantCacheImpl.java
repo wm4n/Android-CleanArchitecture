@@ -19,7 +19,6 @@ import android.content.Context;
 
 import com.wm4n.boilerplate.data.cache.FileManager;
 import com.wm4n.boilerplate.data.cache.serializer.Serializer;
-import com.wm4n.boilerplate.data.entity.UserEntity;
 import com.wm4n.boilerplate.data.exception.CacheNotFoundException;
 import com.wm4n.boilerplate.data.feature.restaurant.entity.RestaurantEntity;
 import com.wm4n.boilerplate.domain.executor.ThreadExecutor;
@@ -121,7 +120,7 @@ public class RestaurantCacheImpl implements RestaurantCache {
   /**
    * Build a file, used to be inserted in the disk cache.
    *
-   * @param id The id user to build the file.
+   * @param id The id restaurant to build the file.
    * @return A valid file.
    */
   private File buildFile(String id) {

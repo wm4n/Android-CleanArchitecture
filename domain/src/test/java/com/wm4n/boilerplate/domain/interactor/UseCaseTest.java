@@ -79,7 +79,7 @@ public class UseCaseTest {
       super(threadExecutor, postExecutionThread);
     }
 
-    @Override Observable<Object> buildUseCaseObservable(Params params) {
+    @Override protected Observable<Object> buildUseCaseObservable(Params params) {
       return Observable.empty();
     }
 

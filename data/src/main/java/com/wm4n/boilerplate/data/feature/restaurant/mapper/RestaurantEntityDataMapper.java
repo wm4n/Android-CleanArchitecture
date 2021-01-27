@@ -17,7 +17,7 @@ import javax.inject.Singleton;
 public class RestaurantEntityDataMapper {
 
   @Inject
-  RestaurantEntityDataMapper() {
+  public RestaurantEntityDataMapper() {
   }
 
   /**
