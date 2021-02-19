@@ -1,0 +1,61 @@
+plugins {
+  id 'com.android.library'
+}
+
+// SDK versions
+def androidBuildToolsVersion = rootProject.ext.androidBuildToolsVersion
+def androidCompileSdkVersion = rootProject.ext.androidCompileSdkVersion
+def androidTargetSdkVersion = rootProject.ext.androidTargetSdkVersion
+def androidMinSdkVersion = rootProject.ext.androidMinSdkVersion
+
+// AndroidX
+def androidX_appCompatVersion = rootProject.ext.androidX_appCompatVersion
+def androidX_supportDesign = rootProject.ext.androidX_supportDesign
+
+// Rx
+def rxJavaVersion = rootProject.ext.rxJavaVersion
+def rxAndroidVersion = rootProject.ext.rxAndroidVersion
+
+// Test
+def jUnitVersion = rootProject.ext.jUnitVersion
+def jUnitExtVersion = rootProject.ext.jUnitExtVersion
+def espressoCoreVersion = rootProject.ext.espressoCoreVersion
+
+android {
+
+  compileSdkVersion androidCompileSdkVersion
+  buildToolsVersion androidBuildToolsVersion
+
+  defaultConfig {
+    minSdkVersion androidMinSdkVersion
+    targetSdkVersion androidTargetSdkVersion
+    versionCode 1
+    versionName "1.0"
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles "consumer-rules.pro"
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+}
+
+dependencies {
+
+  implementation "androidx.appcompat:appcompat:${androidX_appCompatVersion}"
+  implementation "com.google.android.material:material:${androidX_supportDesign}"
+  implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+  implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+
+  testImplementation "junit:junit:${jUnitVersion}"
+  androidTestImplementation "androidx.test.ext:junit:${jUnitExtVersion}"
+  androidTestImplementation "androidx.test.espresso:espresso-core:${espressoCoreVersion}"
+}

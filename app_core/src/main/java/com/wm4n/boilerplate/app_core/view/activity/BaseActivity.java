@@ -1,11 +1,10 @@
-package com.wm4n.boilerplate.presentation.view.activity;
+package com.wm4n.boilerplate.app_core.view.activity;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.View;
@@ -17,11 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.wm4n.boilerplate.presentation.AndroidApplication;
-import com.wm4n.boilerplate.presentation.internal.di.components.ApplicationComponent;
-import com.wm4n.boilerplate.presentation.internal.di.modules.ActivityModule;
-import com.wm4n.boilerplate.presentation.view.InvokeCallback;
-import com.wm4n.boilerplate.presentation.view.OnActivityResultCallback;
+import com.wm4n.boilerplate.app_core.view.InvokeCallback;
+import com.wm4n.boilerplate.app_core.view.OnActivityResultCallback;
 
 /**
  * Base {@link android.app.Activity} class for every Activity in this application.
@@ -29,36 +25,6 @@ import com.wm4n.boilerplate.presentation.view.OnActivityResultCallback;
 public abstract class BaseActivity extends AppCompatActivity {
 
   private static final String ACTION_SIMPLE_POPUP = "ACTION_SIMPLE_POPUP";
-
-  /**
-   * Adds a {@link Fragment} to this activity's layout.
-   *
-   * @param containerViewId The container view to where add the fragment.
-   * @param fragment The fragment to be added.
-   */
-  protected void addFragment(int containerViewId, Fragment fragment) {
-    final FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
-    fragmentTransaction.add(containerViewId, fragment);
-    fragmentTransaction.commit();
-  }
-
-  /**
-   * Get the Main Application component for dependency injection.
-   *
-   * @return {@link ApplicationComponent}
-   */
-  protected ApplicationComponent getApplicationComponent() {
-    return ((AndroidApplication) getApplication()).getApplicationComponent();
-  }
-
-  /**
-   * Get an Activity module for dependency injection.
-   *
-   * @return {@link ActivityModule}
-   */
-  protected ActivityModule getActivityModule() {
-    return new ActivityModule(this);
-  }
 
   /**
    * Render a SnackBar message for a short period
@@ -117,15 +83,21 @@ public abstract class BaseActivity extends AppCompatActivity {
   /**
    * Render a full page error/failure screen with specified text and button action
    *
-   * @param failureText Primary failure text to display
-   * @param buttonText
-   * @param callback
+   * @param failureText Failure text to display
+   * @param buttonText View's action button label
+   * @param callback View's action callback to bind with the action button
    */
   public void renderFailureView(
       @NonNull CharSequence failureText, @Nullable CharSequence buttonText, @Nullable InvokeCallback callback) {
   }
 
-
+  /**
+   * Render a popup error/failure display that does not interrupt user with specified text and button action
+   *
+   * @param failureText Failure text to display
+   * @param buttonText View's action button label
+   * @param callback View's action callback to bind with the action button
+   */
   public void renderPopupView(
       @NonNull CharSequence failureText, @Nullable CharSequence buttonText, @Nullable InvokeCallback callback) {
     View view = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
@@ -168,7 +140,5 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
     finish();
   }
-
-
 
 }

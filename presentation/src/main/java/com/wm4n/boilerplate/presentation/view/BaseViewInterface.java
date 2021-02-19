@@ -3,6 +3,9 @@ package com.wm4n.boilerplate.presentation.view;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.wm4n.boilerplate.app_core.view.AndroidViewInterface;
+import com.wm4n.boilerplate.app_core.view.InvokeCallback;
+
 public interface BaseViewInterface extends AndroidViewInterface {
 
   /**

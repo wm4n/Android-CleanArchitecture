@@ -3,9 +3,9 @@ package com.wm4n.boilerplate.presentation.feature.restaurant;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.wm4n.boilerplate.app_core.view.InvokeCallback;
 import com.wm4n.boilerplate.domain.feature.restaurant.model.Restaurant;
 import com.wm4n.boilerplate.presentation.view.BaseViewInterface;
-import com.wm4n.boilerplate.presentation.view.InvokeCallback;
 
 public interface RestaurantDetailsContract {
 

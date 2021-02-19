@@ -1,9 +1,9 @@
 package com.wm4n.boilerplate.presentation.feature.restaurant;
 
+import com.wm4n.boilerplate.app_core.view.AndroidViewInterface;
 import com.wm4n.boilerplate.domain.feature.restaurant.interactor.GetRestaurantDetails;
 import com.wm4n.boilerplate.domain.feature.restaurant.model.Restaurant;
 import com.wm4n.boilerplate.presentation.internal.di.PerActivity;
-import com.wm4n.boilerplate.presentation.view.AndroidViewInterface;
 
 import javax.inject.Inject;
 

@@ -8,10 +8,10 @@ import android.os.Looper;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.wm4n.boilerplate.app_core.view.InvokeCallback;
+import com.wm4n.boilerplate.app_core.view.InvokeCallback1;
 import com.wm4n.boilerplate.domain.feature.restaurant.model.Restaurant;
 import com.wm4n.boilerplate.presentation.databinding.RestaurantListBinding;
-import com.wm4n.boilerplate.presentation.view.InvokeCallback;
-import com.wm4n.boilerplate.presentation.view.InvokeCallback1;
 import com.wm4n.boilerplate.presentation.view.activity.PresentationBaseActivity;
 
 import java.util.List;

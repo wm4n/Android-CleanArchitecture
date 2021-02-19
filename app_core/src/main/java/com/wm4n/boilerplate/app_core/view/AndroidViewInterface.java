@@ -1,4 +1,4 @@
-package com.wm4n.boilerplate.presentation.view;
+package com.wm4n.boilerplate.app_core.view;
 
 import android.app.Activity;
 import android.content.Context;

@@ -1,13 +1,8 @@
 package com.wm4n.boilerplate.presentation.view.activity;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-
+import com.wm4n.boilerplate.app_core.view.activity.BaseActivity;
 import com.wm4n.boilerplate.presentation.AndroidApplication;
 import com.wm4n.boilerplate.presentation.internal.di.HasComponent;
 import com.wm4n.boilerplate.presentation.internal.di.components.ApplicationComponent;
@@ -19,7 +14,6 @@ import com.wm4n.boilerplate.presentation.navigation.Navigator;
 import javax.inject.Inject;
 
 /** Extending {@link BaseActivity} and providing injection function */
-@SuppressWarnings("unused")
 public abstract class PresentationBaseActivity extends BaseActivity
     implements HasComponent<MainActivityComponent> {
 

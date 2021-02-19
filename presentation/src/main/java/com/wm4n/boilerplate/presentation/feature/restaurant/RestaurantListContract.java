@@ -4,10 +4,11 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.wm4n.boilerplate.app_core.view.AndroidViewInterface;
+import com.wm4n.boilerplate.app_core.view.InvokeCallback;
+import com.wm4n.boilerplate.app_core.view.InvokeCallback1;
 import com.wm4n.boilerplate.domain.feature.restaurant.model.Restaurant;
-import com.wm4n.boilerplate.presentation.view.AndroidViewInterface;
-import com.wm4n.boilerplate.presentation.view.InvokeCallback;
-import com.wm4n.boilerplate.presentation.view.InvokeCallback1;
 
 import java.util.List;
 
